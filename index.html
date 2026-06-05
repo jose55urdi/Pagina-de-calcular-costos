@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1Z5T2PVN2G"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-1Z5T2PVN2G');
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculadora de Costos para Emprendedores</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'DM Sans', sans-serif; background: #f0f2f5; color: #111; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 2rem 1rem; }
+    .card { background: white; border-radius: 16px; padding: 2rem; max-width: 480px; width: 100%; border: 0.5px solid rgba(0,0,0,0.1); }
+    h1 { font-family: 'DM Serif Display', serif; font-size: 26px; font-weight: 400; margin-bottom: 6px; }
+    .sub { font-size: 14px; color: #666; margin-bottom: 2rem; }
+    .field { margin-bottom: 14px; }
+    label { display: block; font-size: 12px; font-weight: 500; color: #555; margin-bottom: 5px; }
+    .prefix-wrap { position: relative; }
+    .prefix { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); font-size: 13px; color: #999; }
+    input { width: 100%; height: 40px; padding: 0 12px 0 36px; border: 0.5px solid rgba(0,0,0,0.2); border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 14px; color: #111; transition: border-color 0.15s; }
+    input:focus { outline: none; border-color: #1a6ef5; box-shadow: 0 0 0 3px rgba(26,110,245,0.1); }
+    .btn { width: 100%; height: 44px; background: #1a6ef5; color: white; border: none; border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; margin-top: 8px; transition: background 0.15s; }
+    .btn:hover { background: #1559d6; }
+    .result { display: none; margin-top: 1.5rem; padding: 1.25rem; background: #e8f0fe; border-radius: 10px; text-align: center; }
+    .result-label { font-size: 12px; color: #1a4db5; font-weight: 500; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 6px; }
+    .result-val { font-size: 32px; font-weight: 600; color: #1a6ef5; }
+  </style>
+
+  <link rel="stylesheet" href="https://sibforms.com/forms/end-form/build/sib-styles.css">
+  <style>
+    .sib-form { margin-top: 1.5rem; }
+    #sib-container { border-radius: 12px !important; }
+    .sib-form-block__button { background-color: #1a6ef5 !important; border-radius: 8px !important; width: 100% !important; text-align: center !important; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Calculadora de Costos</h1>
+    <p class="sub">Ingresa tus costos en bolivianos y obtén el total al instante.</p>
+
+    <div class="field">
+      <label>Materia prima</label>
+      <div class="prefix-wrap">
+        <span class="prefix">Bs.</span>
+        <input type="number" id="materia" placeholder="0.00" min="0" step="0.01" oninput="calcular()" />
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Transporte</label>
+      <div class="prefix-wrap">
+        <span class="prefix">Bs.</span>
+        <input type="number" id="transporte" placeholder="0.00" min="0" step="0.01" oninput="calcular()" />
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Mano de obra</label>
+      <div class="prefix-wrap">
+        <span class="prefix">Bs.</span>
+        <input type="number" id="mano" placeholder="0.00" min="0" step="0.01" oninput="calcular()" />
+      </div>
+    </div>
+
+    <button class="btn" onclick="calcular()">Calcular costo total</button>
+
+    <div class="result" id="resultado">
+      <div class="result-label">Costo total</div>
+      <div class="result-val" id="total">Bs. 0.00</div>
+    </div>
+  </div>
+
+  <script>
+    function calcular() {
+      const m = parseFloat(document.getElementById('materia').value) || 0;
+      const t = parseFloat(document.getElementById('transporte').value) || 0;
+      const o = parseFloat(document.getElementById('mano').value) || 0;
+      const total = m + t + o;
+      document.getElementById('total').textContent = 'Bs. ' + total.toFixed(2);
+      document.getElementById('resultado').style.display = 'block';
+    }
+  </script>
+
+  <div style="max-width:480px; margin: 1.5rem auto 0;">
+    <div id="sib-form-container" class="sib-form-container">
+      <div id="error-message" class="sib-form-message-panel" style="font-family:Helvetica,sans-serif;font-size:14px;color:#661d1d;background-color:#ffeded;border-color:#ff4949;border-radius:8px;max-width:480px;display:none;">
+        <div class="sib-form-message-panel__text sib-form-message-panel__text--center">
+          <span>No hemos podido validar tu suscripción. Intenta de nuevo.</span>
+        </div>
+      </div>
+      <div id="success-message" class="sib-form-message-panel" style="font-family:Helvetica,sans-serif;font-size:14px;color:#085229;background-color:#e7faf0;border-color:#13ce66;border-radius:8px;max-width:480px;display:none;">
+        <div class="sib-form-message-panel__text sib-form-message-panel__text--center">
+          <span>✓ ¡Suscripción realizada! Revisa tu bandeja de entrada.</span>
+        </div>
+      </div>
+      <div id="sib-container" class="sib-container--large sib-container--vertical" style="max-width:480px;text-align:center;background-color:rgba(255,255,255,1);border-width:1px;border-style:solid;border-color:#C0CCD9;border-radius:12px;direction:ltr">
+        <form id="sib-form" method="POST" action="https://18a4a80c.sibforms.com/serve/MUIFAGIWsdRc9W_GI6WPBMSPkjpiSYdctfEPspJyKXmBig4qKarf-tE9LNbLEY7rUqpOtzPQR0C9SdQVl-haZu5aTyElPFJzuMvDyCOTlxfMOp0Mx91kuzYZU4JjW5XKFpbu75zZvnjEQoBaXXvjrC5jSeMcipmfpwWQmE-AD4XIi58cGNvlxzwepNK7aJoPrdlw4DN_vVU7FUHMaw==" data-type="subscription">
+          <div style="padding:12px 0 4px;">
+            <p style="font-family:DM Sans,sans-serif;font-size:16px;font-weight:600;color:#111;text-align:left;padding:0 8px;">¿Quieres más tips de precios?</p>
+            <p style="font-family:DM Sans,sans-serif;font-size:13px;color:#666;text-align:left;padding:4px 8px 8px;">Suscríbete gratis y recibe consejos para emprendedores.</p>
+          </div>
+          <div style="padding:8px;">
+            <div class="sib-input sib-form-block">
+              <div class="form__entry entry_block">
+                <div class="form__label-row">
+                  <div class="entry__field">
+                    <input class="input" type="text" id="EMAIL" name="EMAIL" autocomplete="off" placeholder="tu@email.com" data-required="true" required style="border-radius:8px;font-family:DM Sans,sans-serif;" />
+                  </div>
+                </div>
+                <label class="entry__error entry__error--primary" style="font-family:DM Sans,sans-serif;font-size:13px;color:#661d1d;"></label>
+              </div>
+            </div>
+          </div>
+          <div style="padding:8px;">
+            <button class="sib-form-block__button" style="font-family:DM Sans,sans-serif;font-size:14px;font-weight:600;color:#fff;background-color:#1a6ef5;border:none;border-radius:8px;padding:12px 24px;width:100%;cursor:pointer;" form="sib-form" type="submit">
+              Suscribirme gratis
+            </button>
+          </div>
+          <input type="text" name="email_address_check" value="" class="input--hidden">
+          <input type="hidden" name="locale" value="es">
+        </form>
+      </div>
+    </div>
+    <p style="font-size:11px;color:#999;text-align:center;margin-top:8px;">Sin spam. Puedes darte de baja cuando quieras.</p>
+  </div>
+
+  <script>
+    window.REQUIRED_CODE_ERROR_MESSAGE = 'Elige un código de país';
+    window.LOCALE = 'es';
+    window.EMAIL_INVALID_MESSAGE = 'Email no válido. Verifica el formato.';
+    window.REQUIRED_ERROR_MESSAGE = 'Este campo es obligatorio.';
+    window.GENERIC_INVALID_MESSAGE = 'Información no válida.';
+    var AUTOHIDE = Boolean(0);
+  </script>
+  <script defer src="https://sibforms.com/forms/end-form/build/main.js"></script>
+</body>
+</html>
